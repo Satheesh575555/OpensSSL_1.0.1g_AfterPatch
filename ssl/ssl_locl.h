@@ -972,7 +972,8 @@ int dtls1_retransmit_message(SSL *s, unsigned short seq,
 	unsigned long frag_off, int *found);
 int dtls1_get_queue_priority(unsigned short seq, int is_ccs);
 int dtls1_retransmit_buffered_messages(SSL *s);
-void dtls1_clear_record_buffer(SSL *s);
+void dtls1_clear_received_buffer(SSL *s);
+void dtls1_clear_sent_buffer(SSL *s);
 void dtls1_get_message_header(unsigned char *data, struct hm_header_st *msg_hdr);
 void dtls1_get_ccs_header(unsigned char *data, struct ccs_header_st *ccs_hdr);
 void dtls1_reset_seq_numbers(SSL *s, int rw);
@@ -1173,5 +1174,7 @@ void ssl3_cbc_digest_record(
 void tls_fips_digest_extra(
 	const EVP_CIPHER_CTX *cipher_ctx, EVP_MD_CTX *mac_ctx,
 	const unsigned char *data, size_t data_len, size_t orig_len);
+
+int srp_verify_server_param(SSL *s, int *al);
 
 #endif
